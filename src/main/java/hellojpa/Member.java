@@ -1,14 +1,16 @@
 package hellojpa;
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
 
-@Entity(name="aaa") // JPA에서 사용할 엔티티 이름
+//@Entity(name="aaa") // JPA에서 사용할 엔티티 이름
 @Table(name="member") // 매핑할 테이블이름
 @SequenceGenerator(
         name = "MEMBER_SEQ_GENERATOR",
         sequenceName = "MEMBER_SEQ", // 매핑할 데이터베이스 시퀀스 이름
-        initialValue = 1, allocationSize = 1) // allocationSize 기본값 50이므로 반드시 1로 설정해야함
+        initialValue = 1, allocationSize = 30) // allocationSize 기본값 50이므로 반드시 1로 설정해야함
 public class Member {
 
     @Id
@@ -25,6 +27,7 @@ public class Member {
 
     @Temporal(TemporalType.TIMESTAMP) // 날짜 타입 매핑
     private Date lastModifiedDate;
+    @CreationTimestamp
     private LocalDate createdDate; // 자바8 이상부터는 타입에서 바로 매핑가능
 
     @Lob // BLOB, CLOB 매핑
@@ -34,5 +37,9 @@ public class Member {
     private Integer temp;
 
     public Member() { // 기본생성자
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
