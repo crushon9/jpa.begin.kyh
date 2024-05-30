@@ -40,9 +40,4 @@ public class Member2 {
     public void setTeam(Team team) {
         this.team = team;
     }
-
-    public void addTeam(Team team) {
-        this.team = team;
-        team.getMember2().add(this); // this : member2
-    }
 }

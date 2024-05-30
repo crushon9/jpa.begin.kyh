@@ -12,18 +12,25 @@ public class Team {
 
     private String name;
 
-    public List<Member2> getMember2() {
-        return member2;
-    }
-
-    public void setMember2(List<Member2> member2) {
-        this.member2 = member2;
-    }
-
     @OneToMany(mappedBy = "team") // 연관관계주인이 아님
-    List<Member2> member2 = new ArrayList<Member2>();
+    private List<Member2> members = new ArrayList<>();
 
     public Team() {
+    }
+
+    public void addMember(Member2 member2) {
+        // 양방향 세팅 편의 메소드
+        // 한쪽에 넣을것 아니면 무한루프에 빠질수도있음
+        member2.setTeam(this);
+        members.add(member2);
+    }
+
+    public List<Member2> getMembers() {
+        return members;
+    }
+
+    public void setMembers(List<Member2> members) {
+        this.members = members;
     }
 
     public Long getId() {

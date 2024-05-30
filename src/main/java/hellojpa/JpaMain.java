@@ -23,22 +23,22 @@ public class JpaMain {
             //회원 저장
             Member2 m1 = new Member2();
             m1.setName("user1");
-            m1.addTeam(team);
             em.persist(m1);
+            team.addMember(m1);
 
             Member2 m2 = new Member2();
             m2.setName("user2");
-            m2.addTeam(team);
             em.persist(m2);
+            team.addMember(m2);
 
-           // em.flush();
+            //em.flush();
             //em.clear();
 
             Member2 findM2 = em.find(Member2.class, m1.getId());
             Team findT = findM2.getTeam();
 
             Team findT2 = em.find(Team.class,team.getId());
-            List<Member2> findM2List = findT2.getMember2();
+            List<Member2> findM2List = findT2.getMembers();
 
             for (Member2 m : findM2List) {
                 System.out.println(m.getName());
